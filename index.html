@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 2 - Odd and Even Numbers</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        #logo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        #logo img {
+            width: 150px;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        #number {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .button {
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px;
+        }
+        .button:hover {
+            background-color: darkgreen;
+        }
+        #feedback {
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        #more-lessons {
+            margin-top: 40px;
+            font-size: 18px;
+            background-color: green;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            display: inline-block;
+        }
+        #more-lessons:hover {
+            background-color: darkgreen;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Logo at the top -->
+    <div id="logo">
+        <img src="https://i.imgur.com/mwpTHJj.png" alt="Logo">
+    </div>
+
+    <h1>Odd and Even Numbers</h1>
+
+    <!-- Display Random Number -->
+    <div id="number"></div>
+
+    <!-- Buttons for Odd and Even -->
+    <button class="button" id="odd-button">Odd</button>
+    <button class="button" id="even-button">Even</button>
+
+    <div id="feedback"></div>
+
+    <!-- "More Lessons" button at the bottom -->
+    <a id="more-lessons" href="https://sites.google.com/view/grades-2/home">More Lessons</a>
+
+    <script>
+        let currentNumber;
+
+        // Generate a random number and display it
+        function generateNumber() {
+            currentNumber = Math.floor(Math.random() * 100); // Random number between 0 and 99
+            document.getElementById('number').innerText = currentNumber;
+            document.getElementById('feedback').innerText = ''; // Clear feedback
+        }
+
+        // Check if the answer is correct
+        function checkAnswer(isEven) {
+            const isCorrect = (currentNumber % 2 === 0 && isEven) || (currentNumber % 2 !== 0 && !isEven);
+            if (isCorrect) {
+                document.getElementById('feedback').innerText = "Correct! Well done!";
+                document.getElementById('feedback').style.color = "green";
+                document.getElementById('feedback').style.animation = "fadeIn 1s"; // Fun animation for correct answer
+                setTimeout(generateNumber, 2000); // Move to next number after 2 seconds
+            } else {
+                document.getElementById('feedback').innerText = "Oops! Try again!";
+                document.getElementById('feedback').style.color = "red";
+            }
+        }
+
+        // Initialize number on page load
+        window.onload = function() {
+            generateNumber();
+            document.getElementById('odd-button').onclick = () => checkAnswer(false); // Check for Odd
+            document.getElementById('even-button').onclick = () => checkAnswer(true); // Check for Even
+        }
+    </script>
+
+</body>
+</html>
